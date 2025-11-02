@@ -1,0 +1,69 @@
+.all-boards {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 5px;
+    background-color: #0f0f0f;
+    padding: 10px;
+    border-radius: 12px;
+  }
+  
+  .cell {
+    width: 120px;
+    height: 120px;
+    background-color: #96da8e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .cell:hover {
+    background-color: #dceeff;
+  }
+  
+  .symbol {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+  
+  .winning-cell {
+    background-color: #20c068;
+    border: 3px solid #b35900;
+    border-radius: 10px;
+  }
+  
+  .status-message {
+    text-align: center;
+    font-size: 20px;
+    margin: 10px;
+    font-weight: 600;
+    color: #004080;
+  }
+  
+  .scoreboard {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .reset-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 24px;
+    font-size: 18px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
