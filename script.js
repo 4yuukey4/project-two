@@ -1,134 +1,180 @@
-const BoardsContainer = document.querySelector('.all-boards');
-const statusMessage = document.querySelector('.status-message');
-const resetButton = document.querySelector('.reset-button');
-const scoreXDisplay = document.getElementById('scoreX');
-const scoreODisplay = document.getElementById('scoreO');
+let cafes = [];
+let map;
+let markers = [];
 
-const rows = 3;
-const cols = 3;
+// Hämta cafédata
+fetch("cafes.json")
+  .then(res => res.json())
+  .then(data => {
+    cafes = data;
+    initMap();
+    renderCafes(cafes);
+    renderMarkers(cafes);
+  });
 
-let board = [];
-let currentSpelare = 'X';
-let gameIsActive = true;
-let winningCells = [];
-let playerNames = { X: 'X', O: 'O' };
-let winCounts = { X: 0, O: 0 };
+const container = document.getElementById("cafe-container");
+const buttons = document.querySelectorAll(".filters button");
+const showAllBtn = document.getElementById("showAll");
 
-function promptPlayerNames() {
-  const nameX = prompt("Ange namn för Spelare X:", "Spelare 1") || "X";
-  const nameO = prompt("Ange namn för Spelare O:", "Spelare 2") || "O";
-  playerNames.X = nameX;
-  playerNames.O = nameO;
+// Filtreringsknappar
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const filter = btn.dataset.filter;
+    applyFilter(filter);
+  });
+});
+
+// Publik skärmikon
+const SCREEN_ICON = L.icon({
+  iconUrl: "bilder/här.png",
+  iconSize: [60, 60],
+  iconAnchor: [24, 48],
+  popupAnchor: [0, -40],
+});
+
+const SCREEN_LOCATION = [56.878342, 14.803250];
+
+function initMap() {
+  map = L.map("map").setView(SCREEN_LOCATION, 17);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+  }).addTo(map);
+
+  // Publik skärmmarkör
+  L.marker(SCREEN_LOCATION, { icon: SCREEN_ICON })
+    .addTo(map)
+    .bindPopup("<strong>Du är här</strong><br>Stortorget, Växjö");
+
+  // Visa koordinater i konsolen vid klick
+  map.on("click", function (e) {
+    console.log("Klickade på:", e.latlng.lat.toFixed(6), e.latlng.lng.toFixed(6));
+  });
 }
 
-function updateScores() {
-  scoreXDisplay.textContent = `${playerNames.X} (${winCounts.X} vinster)`;
-  scoreODisplay.textContent = `${playerNames.O} (${winCounts.O} vinster)`;
-}
+// 🔹 Rendera markörer
+function renderMarkers(list) {
+  markers.forEach(m => m.remove());
+  markers = [];
 
-function randomStartPlayer() {
-  currentSpelare = Math.random() < 0.5 ? 'X' : 'O';
-}
+  list.forEach(cafe => {
+    const marker = L.marker([cafe.lat, cafe.lng])
+      .addTo(map)
+      .bindPopup(`<strong>${cafe.name}</strong><br>${cafe.price} – ${cafe.open ? "Öppet" : "Stängt"}`);
 
-function createBoard() {
-  BoardsContainer.innerHTML = '';
-  board = [];
-
-  const boardElement = document.createElement('div');
-  boardElement.classList.add('board');
-
-  for (let i = 0; i < rows * cols; i++) {
-    const cell = document.createElement('div');
-    cell.classList.add('cell');
-    cell.dataset.index = i;
-
-    cell.addEventListener('click', () => {
-      if (!gameIsActive || cell.firstChild) return;
-
-      const img = document.createElement('img');
-      img.src = currentSpelare === 'X' ? 'x.jpg' : 'o.png'; // byt till rätt bildfil
-      img.alt = currentSpelare;
-      img.classList.add('symbol');
-
-      cell.appendChild(img);
-
-      if (checkWinner()) {
-        winCounts[currentSpelare]++;
-        updateScores();
-        statusMessage.textContent = `Spelare ${playerNames[currentSpelare]} vinner!`;
-        highlightWinner();
-        gameIsActive = false;
-      } else if (checkDraw()) {
-        statusMessage.textContent = `Oavgjort!`;
-        gameIsActive = false;
-      } else {
-        currentSpelare = currentSpelare === 'X' ? 'O' : 'X';
-        statusMessage.textContent = `Spelare ${playerNames[currentSpelare]}s tur`;
-      }
+    // Klick på markör → visa kortet
+    marker.on("click", () => {
+      map.setView([cafe.lat, cafe.lng], 17, { animate: true });
+      highlightCard(cafe.id);
     });
 
-    boardElement.appendChild(cell);
-    board.push(cell);
-  }
-
-  BoardsContainer.appendChild(boardElement);
-  statusMessage.textContent = `Spelare ${playerNames[currentSpelare]}s tur`;
+    markers.push(marker);
+  });
 }
 
-function checkWinner() {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
+// 🔸 Visa endast valt kort + gör kartan mindre
+function highlightCard(cafeId) {
+  const allCards = document.querySelectorAll(".card");
+  const mapElement = document.getElementById("map");
 
-  for (const line of lines) {
-    const [a, b, c] = line;
-    if (
-      board[a].firstChild &&
-      board[b].firstChild &&
-      board[c].firstChild &&
-      board[a].firstChild.alt === board[b].firstChild.alt &&
-      board[a].firstChild.alt === board[c].firstChild.alt
-    ) {
-      winningCells = line;
-      return true;
+  allCards.forEach(card => {
+    const isMatch = card.dataset.id == cafeId;
+    const closeBtn = card.querySelector(".close-btn");
+
+    if (isMatch) {
+      card.classList.add("active");
+      card.classList.remove("hidden");
+      if (closeBtn) closeBtn.style.display = "block";
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      card.classList.add("hidden");
+      card.classList.remove("active");
+      if (closeBtn) closeBtn.style.display = "none";
     }
+  });
+
+  mapElement.classList.add("map-small");
+}
+
+// ❌ Stäng aktivt kort och återställ
+function closeActiveCard() {
+  const mapElement = document.getElementById("map");
+
+  document.querySelectorAll(".card").forEach(card => {
+    card.classList.remove("active", "hidden");
+    const closeBtn = card.querySelector(".close-btn");
+    if (closeBtn) closeBtn.style.display = "none";
+  });
+
+  mapElement.classList.remove("map-small");
+  map.setView(SCREEN_LOCATION, 15, { animate: true });
+}
+
+// 🔹 Visa alla kort igen (om knapp finns)
+if (showAllBtn) {
+  showAllBtn.addEventListener("click", closeActiveCard);
+}
+
+// 🔹 Rendera kafékort
+function renderCafes(list) {
+  container.innerHTML = list.map(cafe => `
+    <div class="card" data-id="${cafe.id}">
+      <button class="close-btn" onclick="closeActiveCard()">×</button>
+
+      <img src="${cafe.img}" alt="${cafe.name}">
+      <div class="card-content">
+        <h2>${cafe.name}</h2>
+        <p class="address"><strong>Adress:</strong> ${cafe.address}</p>
+        <p class="distance"><strong>Avstånd:</strong> ${cafe.distance} m</p>
+        <p class="hours"><strong>Öppettider:</strong> ${cafe.hours}</p>
+
+        <div class="features">
+          <strong>Utbud:</strong>
+          <div class="feature-icons">
+            ${cafe.features.map(f => featureImage(f)).join("")}
+          </div>
+        </div>
+
+        ${cafe.offers && cafe.offers.length > 0 ? `
+          <div class="offers">
+            <strong>Erbjudanden:</strong>
+            <div class="offer-images">
+              ${cafe.offers.map(o => `
+                <div class="offer-item">
+                  <img src="${o.img}" alt="${o.title}" title="${o.title}">
+                  <p>${o.title}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        ` : ""}
+
+        <div class="status ${cafe.open ? "open" : "closed"}"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// 🔹 Funktion för ikoner (wifi, wc, tyst osv.)
+function featureImage(f) {
+  const base = "bilder";
+  const size = 70;
+
+  switch (f) {
+    case "wifi": return `<img src="${base}/wifi.png" alt="Wifi" width="${size}" height="${size}" title="Wifi">`;
+    case "wc": return `<img src="${base}/toalett.png" alt="oalett" width="${size}" height="${size}" title="Toalett">`;
+    case "quiet": return `<img src="${base}/tyst.png" alt="Tyst miljö" width="${size}" height="${size}" title="Tyst miljö">`;
+    default: return "";
   }
-  return false;
 }
 
-function highlightWinner() {
-  winningCells.forEach(index => {
-    board[index].classList.add('winning-cell');
-  });
+// 🔹 Filtrering
+function applyFilter(type) {
+  let filtered = cafes;
+  if (type === "open") filtered = cafes.filter(c => c.open);
+  if (type === "wifi") filtered = cafes.filter(c => c.features.includes("wifi"));
+  renderCafes(filtered);
+  renderMarkers(filtered);
 }
-
-function checkDraw() {
-  return board.every(cell => cell.firstChild);
-}
-
-function resetBoard() {
-  board.forEach(cell => {
-    cell.innerHTML = '';
-    cell.classList.remove('winning-cell');
-  });
-  randomStartPlayer();
-  gameIsActive = true;
-  winningCells = [];
-  statusMessage.textContent = `Spelare ${playerNames[currentSpelare]}s tur`;
-}
-
-promptPlayerNames();
-updateScores();
-randomStartPlayer();
-createBoard();
-
-resetButton.addEventListener('click', () => {
-  resetBoard();
-});
