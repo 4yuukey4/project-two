@@ -1,44 +1,27 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kafékarta Växjö</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Välkommen – Publik Skärm</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <nav class="navbar">
-      <img src="bilder/logo.png" alt="CaféFinder logotyp" class="logo">
-      <h1>Kaféer</h1>
-      <div class="filters">
-        <button data-filter="all" class="active">Alla</button>
-        <button data-filter="open">Öppna nu</button>
-        <button data-filter="wifi">Wifi</button>
-      </div>
-  
-    </nav>
-  </header>
-  
-  <!-- Karta -->
-  <div id="map"></div>
+  <div class="welcome-container">
+    <div class="gallery">
+      <img src="bilder/kafe1.jpg" alt="Publik skärm vinkel 1">
+      <img src="bilder/kafe3.jpg" alt="Publik skärm vinkel 2">
+      <img src="bilder/kafe4.jpg" alt="Publik skärm vinkel 3">
+      <img src="bilder/kafe4.jpg" alt="Publik skärm vinkel 4">
+    </div>
 
-  <div id="cafe-container" class="grid"></div>
-
-  <!-- Leaflet JS (officiell SRI) - MÅSTE komma före script.js -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-
-  <script src="script.js"></script>
+    <div class="welcome-content">
+      <h1>Välkommen till den Publika Skärmen</h1>
+      <p>
+       Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed at commodi modi sapiente neque expedita omnis. Animi distinctio tenetur voluptas.
+      </p>
+      <button onclick="window.location.href='home.html'">Utforska skärmen</button>
+    </div>
+  </div>
 </body>
 </html>

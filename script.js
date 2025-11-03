@@ -37,7 +37,7 @@ const SCREEN_ICON = L.icon({
 const SCREEN_LOCATION = [56.878342, 14.803250];
 
 function initMap() {
-  map = L.map("map").setView(SCREEN_LOCATION, 17);
+  map = L.map("map").setView(SCREEN_LOCATION, 30);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
@@ -66,7 +66,7 @@ function renderMarkers(list) {
 
     // Klick på markör → visa kortet
     marker.on("click", () => {
-      map.setView([cafe.lat, cafe.lng], 17, { animate: true });
+      map.setView([cafe.lat, cafe.lng], 17, );
       highlightCard(cafe.id);
     });
 
@@ -74,7 +74,7 @@ function renderMarkers(list) {
   });
 }
 
-// 🔸 Visa endast valt kort + gör kartan mindre
+// Visa endast valt kort + gör kartan mindre
 function highlightCard(cafeId) {
   const allCards = document.querySelectorAll(".card");
   const mapElement = document.getElementById("map");
@@ -98,7 +98,7 @@ function highlightCard(cafeId) {
   mapElement.classList.add("map-small");
 }
 
-// ❌ Stäng aktivt kort och återställ
+//  Stäng aktivt kort och återställ
 function closeActiveCard() {
   const mapElement = document.getElementById("map");
 
@@ -112,12 +112,12 @@ function closeActiveCard() {
   map.setView(SCREEN_LOCATION, 15, { animate: true });
 }
 
-// 🔹 Visa alla kort igen (om knapp finns)
+//  Visa alla kort igen (om knapp finns)
 if (showAllBtn) {
   showAllBtn.addEventListener("click", closeActiveCard);
 }
 
-// 🔹 Rendera kafékort
+// Rendera kafékort
 function renderCafes(list) {
   container.innerHTML = list.map(cafe => `
     <div class="card" data-id="${cafe.id}">
@@ -170,7 +170,7 @@ function featureImage(f) {
   }
 }
 
-// 🔹 Filtrering
+//  Filtrering
 function applyFilter(type) {
   let filtered = cafes;
   if (type === "open") filtered = cafes.filter(c => c.open);

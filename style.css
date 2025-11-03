@@ -1,4 +1,4 @@
-/* ========= BASSTIL ========= */
+/*  body */
 body {
   font-family: 'Inter', sans-serif;
   background: #f5f5f5;
@@ -9,7 +9,7 @@ body {
   touch-action: manipulation;  /* optimerad för touch */
 }
 
-/* ========= HEADER & NAV ========= */
+/*  HEADER & NAV  */
 .header {
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Navbar med logga + knappar */
+/* Navbar  */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -55,7 +55,6 @@ body {
   font-weight: 600;
   cursor: pointer;
   min-width: 160px;
-
 }
 
 .filters .active {
@@ -70,7 +69,7 @@ h1 {
   margin: 0;
 }
 
-/* ========= KARTA ========= */
+/* KARTA  */
 #map {
   height: 60vh;
   width: 100%;
@@ -83,7 +82,7 @@ h1 {
   height: 30vh !important;
 }
 
-/* ========= GRID & KORT ========= */
+/* GRID & KORT  */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -106,15 +105,11 @@ h1 {
   object-fit: cover;
 }
 
-
 .card.active > img {
   transform: scale(1.2);
   height: 300px;
-
   z-index: 0;
 }
-
-
 
 .card-content {
   padding: 1.5rem;
@@ -131,7 +126,7 @@ h1 {
   margin: 0.4rem 0;
 }
 
-/* ========= CLOSE-BUTTON ========= */
+/* CLOSE-BUTTON */
 .close-btn {
   display: none;
   position: absolute;
@@ -149,7 +144,7 @@ h1 {
   z-index: 10;
 }
 
-/* ========= FEATURE-IKONER ========= */
+/* FEATURE-IKONER */
 .features {
   margin-top: 1rem;
 }
@@ -170,7 +165,7 @@ h1 {
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
-/* ========= ERBJUDANDEN ========= */
+/* ERBJUDANDEN  */
 .offers {
   margin-top: 1.2rem;
 }
@@ -197,7 +192,7 @@ h1 {
   box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-/* ========= ÖPPET/STÄNGT ========= */
+/*  ÖPPET/STÄNGT  */
 .status {
   width: 80px;
   height: 80px;
@@ -215,7 +210,7 @@ h1 {
   background-image: url("bilder/stängt.png");
 }
 
-/* ========= AKTIVT / DOLT KORT ========= */
+/*  AKTIVT / DOLT KORT */
 .card.hidden {
   display: none;
 }
@@ -228,8 +223,6 @@ h1 {
   z-index: 10;
 }
 
-
-
 .card.active .close-btn {
   display: block;
 }
@@ -240,4 +233,137 @@ h1 {
   transition: all 0.3s ease;
 }
 
+.welcome-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #e8f5e9 0%, #ffffff 100%);
+}
 
+/* Innehållet i mitten */
+.welcome-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4rem 6rem;
+  border-radius: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: center;
+  max-width: 1000px;
+  z-index: 1;
+}
+
+.welcome-content h1 {
+  font-size: 5rem;
+  color: #2e7d32;
+  margin-bottom: 2rem;
+}
+
+.welcome-content p {
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 3rem;
+}
+
+.welcome-content button {
+  padding: 2.5rem 6rem;
+  font-size: 2.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.welcome-content button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+
+.gallery {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+.gallery img {
+  position: absolute;
+  width: 780px;
+  height: 720px;
+  object-fit: cover;
+  border-radius: 150px;
+  border: 14px solid #ffffff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  opacity: 0.9;
+  transition: transform 5s ease, opacity 1.5s ease;
+}
+
+.gallery img:nth-child(1) {
+  top: 15%;
+  left: 10%;
+  transform: rotate(-10deg);
+}
+
+
+.gallery img:nth-child(2) {
+  top: 600px;
+  right: 800px;
+  transform: rotate(8deg);
+}
+
+.gallery img:nth-child(3) {
+  bottom: 400px;
+  right: 950px;
+  transform: rotate(15deg);
+}
+
+.gallery img:nth-child(4) {
+  bottom: 20px;
+  right: 3000px;
+  transform: rotate(-12deg);
+}
+
+.gallery img:nth-child(5) {
+  bottom: 00px;
+  left: -10%;
+  transform: rotate(5deg);
+}
+
+.gallery img:nth-child(6) {
+  top: 48%;
+  right: -8%;
+  transform: rotate(-8deg);
+}
+
+/* Mjuk svävande rörelse */
+@keyframes drift {
+  0% { transform: translateY(0) scale(1) rotate(var(--angle)); }
+  50% { transform: translateY(-25px) scale(1.03) rotate(var(--angle)); }
+  100% { transform: translateY(0) scale(1) rotate(var(--angle)); }
+}
+
+.gallery img {
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.gallery img:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* ========= RESPONSIV ANPASSNING ========= */
+@media (max-width: 1024px) {
+  .gallery img {
+    width: 360px;
+    height: 360px;
+    border: 8px solid #fff;
+  }
+}
