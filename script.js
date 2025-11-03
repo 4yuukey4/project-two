@@ -66,7 +66,7 @@ function renderMarkers(list) {
 
     // Klick på markör → visa kortet
     marker.on("click", () => {
-      map.setView([cafe.lat, cafe.lng], 17, );
+      map.setView([cafe.lat, cafe.lng], 17);
       highlightCard(cafe.id);
     });
 
@@ -164,7 +164,7 @@ function featureImage(f) {
 
   switch (f) {
     case "wifi": return `<img src="${base}/wifi.png" alt="Wifi" width="${size}" height="${size}" title="Wifi">`;
-    case "wc": return `<img src="${base}/toalett.png" alt="oalett" width="${size}" height="${size}" title="Toalett">`;
+    case "wc": return `<img src="${base}/toalett.png" alt="Toalett" width="${size}" height="${size}" title="Toalett">`;
     case "quiet": return `<img src="${base}/tyst.png" alt="Tyst miljö" width="${size}" height="${size}" title="Tyst miljö">`;
     default: return "";
   }
@@ -178,3 +178,20 @@ function applyFilter(type) {
   renderCafes(filtered);
   renderMarkers(filtered);
 }
+
+/* ========= INAKTIVITETSTIMER =========
+   Återgår automatiskt till startsidan efter viss tid utan interaktion */
+let timeout;
+
+function resetTimer() {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    window.location.href = "index.html"; // gå tillbaka till välkomstsidan
+  }, 6000); // 2 minuter (120 000 ms)
+}
+
+// Starta timer vid laddning och återställ vid interaktion
+window.onload = resetTimer;
+["mousemove", "keydown", "click", "touchstart"].forEach(evt => {
+  document.addEventListener(evt, resetTimer);
+});
