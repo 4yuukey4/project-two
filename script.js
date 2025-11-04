@@ -2,6 +2,7 @@ let cafes = [];
 let map;
 let markers = [];
 
+
 // Hämta cafédata
 fetch("cafes.json")
   .then(res => res.json())
@@ -28,13 +29,13 @@ buttons.forEach(btn => {
 
 // Publik skärmikon
 const SCREEN_ICON = L.icon({
-  iconUrl: "bilder/här.png",
+  iconUrl: "bilder/pin1.png",
   iconSize: [60, 60],
   iconAnchor: [24, 48],
   popupAnchor: [0, -40],
 });
 
-const SCREEN_LOCATION = [56.878342, 14.803250];
+const SCREEN_LOCATION = [56.878785, 14.805145];
 
 function initMap() {
   map = L.map("map").setView(SCREEN_LOCATION, 30);
@@ -46,8 +47,8 @@ function initMap() {
   // Publik skärmmarkör
   L.marker(SCREEN_LOCATION, { icon: SCREEN_ICON })
     .addTo(map)
-    .bindPopup("<strong>Du är här</strong><br>Stortorget, Växjö");
-
+    .bindPopup("<strong>Du är här</strong><br>Stortorget, Växjö")
+    .openPopup();
   // Visa koordinater i konsolen vid klick
   map.on("click", function (e) {
     console.log("Klickade på:", e.latlng.lat.toFixed(6), e.latlng.lng.toFixed(6));
@@ -179,18 +180,17 @@ function applyFilter(type) {
   renderMarkers(filtered);
 }
 
-/* ========= INAKTIVITETSTIMER =========
-   Återgår automatiskt till startsidan efter viss tid utan interaktion */
+/* utan interaktion */
 let timeout;
 
 function resetTimer() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    window.location.href = "index.html"; // gå tillbaka till välkomstsidan
-  }, 6000); // 2 minuter (120 000 ms)
+    window.location.href = "index.html"; 
+  }, 6000); 
 }
 
-// Starta timer vid laddning och återställ vid interaktion
+
 window.onload = resetTimer;
 ["mousemove", "keydown", "click", "touchstart"].forEach(evt => {
   document.addEventListener(evt, resetTimer);
