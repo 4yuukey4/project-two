@@ -357,14 +357,25 @@ h1 {
 }
 
 
-
-
-
-/* ========= RESPONSIV ANPASSNING ========= */
-@media (max-width: 1024px) {
-  .gallery img {
-    width: 360px;
-    height: 360px;
-    border: 8px solid #fff;
-  }
+/* SÖKFÄLT */
+.search-bar {
+  display: flex;
+  justify-content: center;
+ 
 }
+
+#searchInput {
+  width: 50%;
+  padding: 1rem 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 40px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 150px;
+}
+
+#searchInput:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+

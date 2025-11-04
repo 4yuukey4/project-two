@@ -180,6 +180,23 @@ function applyFilter(type) {
   renderMarkers(filtered);
 }
 
+// 🔍 SÖKFUNKTION
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase().trim();
+    const filtered = cafes.filter(cafe =>
+      cafe.name.toLowerCase().includes(term) ||
+      cafe.address.toLowerCase().includes(term) ||
+      cafe.features.some(f => f.toLowerCase().includes(term))
+    );
+    renderCafes(filtered);
+    renderMarkers(filtered);
+  });
+}
+s
+
 /* utan interaktion */
 let timeout;
 
@@ -187,7 +204,7 @@ function resetTimer() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     window.location.href = "index.html"; 
-  }, 6000); 
+  }, 60000); 
 }
 
 
