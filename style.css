@@ -371,7 +371,7 @@ h1 {
   border-radius: 40px;
   outline: none;
   transition: all 0.3s ease;
-  font-size: 150px;
+  font-size: 100px;
 }
 
 #searchInput:focus {
