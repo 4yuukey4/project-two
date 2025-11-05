@@ -376,7 +376,7 @@ h1 {
 }
 
 #searchInput {
-  width: 50%;
+  width: 100%;
   padding: 1rem 1.5rem;
   border: 2px solid #ccc;
   border-radius: 40px;
