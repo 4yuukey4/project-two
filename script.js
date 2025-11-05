@@ -213,7 +213,7 @@ function resetTimer() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     window.location.href = "index.html"; 
-  }, 6000); 
+  }, 600000); 
 }
 
 
