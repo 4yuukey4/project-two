@@ -191,11 +191,21 @@ if (searchInput) {
       cafe.address.toLowerCase().includes(term) ||
       cafe.features.some(f => f.toLowerCase().includes(term))
     );
+
     renderCafes(filtered);
     renderMarkers(filtered);
+
+    const mapElement = document.getElementById("map");
+    if (term.length > 0 && filtered.length > 0) {
+      mapElement.classList.add("map-small");
+    } else {
+      mapElement.classList.remove("map-small");
+    }
   });
 }
-s
+
+
+
 
 /* utan interaktion */
 let timeout;
