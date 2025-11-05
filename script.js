@@ -214,7 +214,7 @@ function resetTimer() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     window.location.href = "index.html"; 
-  }, 60000); 
+  }, 1200000); 
 }
 
 

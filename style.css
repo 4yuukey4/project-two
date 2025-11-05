@@ -58,6 +58,17 @@ body {
   min-width: 160px;
 }
 
+.back{
+  background: #e7e7e7;
+  border: none;
+  border-radius: 40px;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: -900PX;
+}
+
 .filters .active {
   background: #4caf50;
   color: white;
@@ -380,3 +391,51 @@ h1 {
 }
 
 
+/* --- För Mac och stora Retina-skärmar (MacBook, iMac, m.fl.) --- */
+@media only screen 
+  and (min-width: 1440px) 
+  and (-webkit-min-device-pixel-ratio: 2), 
+only screen 
+  and (min-width: 1440px) 
+  and (min-resolution: 192dpi) {
+
+  body {
+    padding: 3rem;
+    font-size: 1.2rem;
+  }
+
+  .navbar {
+    height: 220px;
+    padding: 2rem 4rem;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  #map {
+    height: 70vh;
+  }
+
+  .card img {
+    height: 300px;
+  }
+
+  #searchInput {
+    width: 40%;
+    font-size: 3rem;
+  }
+
+  .welcome-content {
+    max-width: 1200px;
+    padding: 6rem 8rem;
+  }
+
+  .welcome-content h1 {
+    font-size: 6rem;
+  }
+
+  .welcome-content p {
+    font-size: 2.4rem;
+  }
+}
