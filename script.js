@@ -206,7 +206,6 @@ if (searchInput) {
 
 
 
-
 /* utan interaktion */
 let timeout;
 
@@ -214,7 +213,7 @@ function resetTimer() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     window.location.href = "index.html"; 
-  }, 600000); 
+  }, 6000); 
 }
 
 
