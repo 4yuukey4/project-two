@@ -5,17 +5,17 @@
     "lat": 56.877934,
     "lng": 14.809006,
     "open": true,
-    "price": "$$",
+    "price": "200kr",
     "distance": 350,
     "address": "Storgatan 10, Växjö",
     "hours": "Mån–Fre 07:00–20:00, Lör–Sön 08:00–19:00",
-    "features": ["wifi", "wc", "vegan"],
+    "features": ["wifi", "wc" ],
     "offers": [
-      { "img": "bilder/kafe3.jpg", "title": "Kaffe" },
+      { "img": "bilder/kafe3.jpg", "title": "kaffe"},
       { "img": "bilder/kafe1.jpg", "title": "Fika" }
   
     ],
-    "img": "bilder/kafe1.jpg"
+    "img": "bilder/kafe4.jpg"
   },
   {
     "id": 2,
@@ -23,17 +23,17 @@
     "lat": 56.878541,
     "lng": 14.805885,
     "open": true,
-    "price": "$$$",
+    "price": "150kr",
     "distance": 420,
     "address": "Sandgärdsgatan 19, Växjö",
     "hours": "Mån–Fre 08:00–23:00, Lör 09:00–01:00, Sön 10:00–18:00",
     "features": ["wifi", "outdoor", "gluten_free"],
     "offers": [
-      { "img": "bilder/fika.png", "title": "Fika" },
-      { "img": "bilder/kaffe.png", "title": "Kaffe" },
-      { "img": "bilder/dessert.png", "title": "Dessert" }
+      { "img": "bilder/kafe3.jpg", "title": "kaffe" },
+      { "img": "bilder/kannel2.jpg", "title": "Fika" }
     ],
-    "img": "bilder/tyst."
+     "img": "bilder/kafe1.jpg"
+   
   },
   {
     "id": 3,
@@ -41,51 +41,17 @@
     "lat": 56.878210,
     "lng": 14.803720,
     "open": false,
-    "price": "$",
+    "price": "50-100kr",
     "distance": 650,
     "address": "Smedjegatan 2, Växjö",
     "hours": "Mån–Fre 09:00–17:00, Lör 10:00–15:00, Sön stängt",
     "features": ["quiet", "wc", "wifi"],
     "offers": [
-      { "img": "bilder/bulle.png", "title": "Kanelbulle" },
-      { "img": "bilder/kaffe.png", "title": "Kaffe" }
+      { "img": "bilder/kannel1.jpg", "title": "bulle" },
+      { "img": "bilder/kafe3.jpg", "title": "kaffe" }
     ],
-    "img": "bilder/smedjan.jpg"
-  },
-  {
-    "id": 4,
-    "name": "PM Bröd & Sovel",
-    "lat": 56.877970,
-    "lng": 14.804989,
-    "open": true,
-    "price": "$$$",
-    "distance": 280,
-    "address": "Storgatan 22, Växjö",
-    "hours": "Mån–Fre 07:30–18:00, Lör–Sön 08:00–16:00",
-    "features": ["wifi", "outdoor", "gluten_free", "vegan"],
-    "offers": [
-      { "img": "bilder/bröd.png", "title": "Nybakat bröd" },
-      { "img": "bilder/frukost.png", "title": "Frukost" },
-      { "img": "bilder/lunch.png", "title": "Lunch" }
-    ],
-    "img": "bilder/pm.jpg"
-  },
-  {
-    "id": 5,
-    "name": "Kafé Fontaine",
-    "lat": 56.879300,
-    "lng": 14.806410,
-    "open": false,
-    "price": "100-250kr",
-    "distance": 520,
-    "address": "Nygatan 24, Växjö",
-    "hours": "Mån–Fre 08:00–17:00, Lör–Sön 09:00–16:00",
-    "features": ["wifi", "quiet", "vegan"],
-    "offers": [
-      { "img": "bilder/sallad.png", "title": "Sallad" },
-      { "img": "bilder/kaffe.png", "title": "Kaffe" },
-      { "img": "bilder/fika.png", "title": "Fika" }
-    ],
-    "img": "bilder/fontaine.jpg"
+     "img": "bilder/kafe2.jpg"
+
   }
+  
 ]
