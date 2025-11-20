@@ -12,7 +12,7 @@
     "features": ["wifi", "wc" ],
     "offers": [
       { "img": "bilder/kafe3.jpg", "title": "kaffe"},
-      { "img": "bilder/kafe1.jpg", "title": "Fika" }
+      { "img": "bilder/dessart.jpg", "title": "Fika" }
   
     ],
     "img": "bilder/kafe4.jpg"
